@@ -82,6 +82,27 @@ export async function createTask(projectId: number, userId: number, body: Record
   return serializeTask(task);
 }
 
+async function resolveStatusChange(
+  task: TaskRow,
+  userId: number,
+  rawStatus: unknown,
+): Promise<Status | null> {
+  const requested = assertStatus(rawStatus);
+  if (requested === task.status) return null;
+
+  if (task.assigneeId !== userId) {
+    const membership = await db.projectMember.findUnique({
+      where: { projectId_userId: { projectId: task.projectId, userId } },
+    });
+    if (!membership || (membership.role !== 'OWNER' && membership.role !== 'ADMIN')) {
+      throw forbidden('Only the assignee or a project admin can change the status');
+    }
+  }
+
+  assertTransition(task.status as Status, requested);
+  return requested;
+}
+
 /**
  * Actualiza una tarea: valida los campos recibidos, aplica las reglas de
  * autorización, resuelve la transición de estado, escribe el historial y
@@ -120,26 +141,7 @@ export async function updateTask(taskId: number, userId: number, body: Record<st
   }
 
   if (body.status !== undefined) {
-    const requested = assertStatus(body.status);
-    if (requested !== task.status) {
-      const isAssignee = task.assigneeId === userId;
-      if (!isAssignee) {
-        const membership = await db.projectMember.findUnique({
-          where: { projectId_userId: { projectId: task.projectId, userId } },
-        });
-        if (!membership) {
-          throw forbidden('Only the assignee or a project admin can change the status');
-        } else if (membership.role !== 'OWNER' && membership.role !== 'ADMIN') {
-          throw forbidden('Only the assignee or a project admin can change the status');
-        } else {
-          assertTransition(task.status as Status, requested);
-          nextStatus = requested;
-        }
-      } else {
-        assertTransition(task.status as Status, requested);
-        nextStatus = requested;
-      }
-    }
+    nextStatus = await resolveStatusChange(task, userId, body.status);
   }
 
   if (nextStatus !== null) {
