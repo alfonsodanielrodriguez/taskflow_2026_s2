@@ -29,19 +29,29 @@ export async function listByProject(req: Request, res: Response, next: NextFunct
 
     const rows = await repo.findTasks(projectId, filters);
 
-    const items = [];
-    for (const row of rows) {
-      const assignee = row.assigneeId
-        ? await db.user.findUnique({ where: { id: row.assigneeId } })
-        : null;
-      const commentCount = await db.comment.count({ where: { taskId: row.id } });
-      items.push(
-        service.serializeTask(row as service.TaskRow, {
-          assignee: assignee ? { id: toPublicId('user', assignee.id), email: assignee.email } : null,
-          commentCount,
-        }),
-      );
-    }
+    const assigneeIds = [...new Set(rows.flatMap((row) =>
+      row.assigneeId === null ? [] : [row.assigneeId],
+    ))];
+    const [assignees, commentCounts] = await Promise.all([
+      db.user.findMany({
+        where: { id: { in: assigneeIds } },
+        select: { id: true, email: true },
+      }),
+      db.comment.groupBy({
+        by: ['taskId'],
+        where: { taskId: { in: rows.map((row) => row.id) } },
+        _count: { _all: true },
+      }),
+    ]);
+    const assigneesById = new Map(assignees.map((user) => [user.id, user]));
+    const countsByTask = new Map(commentCounts.map((count) => [count.taskId, count._count._all]));
+    const items = rows.map((row) => {
+      const assignee = row.assigneeId === null ? null : assigneesById.get(row.assigneeId);
+      return service.serializeTask(row, {
+        assignee: assignee ? { id: toPublicId('user', assignee.id), email: assignee.email } : null,
+        commentCount: countsByTask.get(row.id) ?? 0,
+      });
+    });
 
     res.json({ items, total: rows.length, limit, offset });
   } catch (err) {

@@ -40,20 +40,23 @@ export function serializeTask(t: TaskRow, extra: Record<string, unknown> = {}) {
   };
 }
 
+async function validateAssignee(rawId: unknown, projectId: number): Promise<number | null> {
+  if (rawId === undefined || rawId === null) return null;
+
+  const assigneeId = parsePublicId(rawId, 'user');
+  if (assigneeId === null) throw badRequest('assigneeId must be a valid user id');
+  if (!(await isMember(assigneeId, projectId))) {
+    throw badRequest('The assignee must be a member of the project');
+  }
+  return assigneeId;
+}
+
 export async function createTask(projectId: number, userId: number, body: Record<string, unknown>) {
   const title = assertString(body.title, 'title', 3, 200);
   const description = assertOptionalString(body.description, 'description', 500);
   const priority = body.priority === undefined ? 'MEDIUM' : assertPriority(body.priority);
 
-  let assigneeId: number | null = null;
-  if (body.assigneeId !== undefined && body.assigneeId !== null) {
-    const parsed = parsePublicId(body.assigneeId, 'user');
-    if (parsed === null) throw badRequest('assigneeId must be a valid user id');
-    if (!(await isMember(parsed, projectId))) {
-      throw badRequest('The assignee must be a member of the project');
-    }
-    assigneeId = parsed;
-  }
+  const assigneeId = await validateAssignee(body.assigneeId, projectId);
 
   const dueDate = body.dueDate === undefined ? undefined : parseDueDate(body.dueDate);
   if (dueDate === undefined && body.dueDate !== undefined) {
@@ -77,6 +80,27 @@ export async function createTask(projectId: number, userId: number, body: Record
   });
 
   return serializeTask(task);
+}
+
+async function resolveStatusChange(
+  task: TaskRow,
+  userId: number,
+  rawStatus: unknown,
+): Promise<Status | null> {
+  const requested = assertStatus(rawStatus);
+  if (requested === task.status) return null;
+
+  if (task.assigneeId !== userId) {
+    const membership = await db.projectMember.findUnique({
+      where: { projectId_userId: { projectId: task.projectId, userId } },
+    });
+    if (!membership || (membership.role !== 'OWNER' && membership.role !== 'ADMIN')) {
+      throw forbidden('Only the assignee or a project admin can change the status');
+    }
+  }
+
+  assertTransition(task.status as Status, requested);
+  return requested;
 }
 
 /**
@@ -113,44 +137,11 @@ export async function updateTask(taskId: number, userId: number, body: Record<st
   }
 
   if (body.assigneeId !== undefined) {
-    if (body.assigneeId === null) {
-      data.assigneeId = null;
-    } else {
-      const parsed = parsePublicId(body.assigneeId, 'user');
-      if (parsed === null) {
-        throw badRequest('assigneeId must be a valid user id');
-      } else {
-        const memberOfProject = await isMember(parsed, task.projectId);
-        if (!memberOfProject) {
-          throw badRequest('The assignee must be a member of the project');
-        } else {
-          data.assigneeId = parsed;
-        }
-      }
-    }
+    data.assigneeId = await validateAssignee(body.assigneeId, task.projectId);
   }
 
   if (body.status !== undefined) {
-    const requested = assertStatus(body.status);
-    if (requested !== task.status) {
-      const isAssignee = task.assigneeId === userId;
-      if (!isAssignee) {
-        const membership = await db.projectMember.findUnique({
-          where: { projectId_userId: { projectId: task.projectId, userId } },
-        });
-        if (!membership) {
-          throw forbidden('Only the assignee or a project admin can change the status');
-        } else if (membership.role !== 'OWNER' && membership.role !== 'ADMIN') {
-          throw forbidden('Only the assignee or a project admin can change the status');
-        } else {
-          assertTransition(task.status as Status, requested);
-          nextStatus = requested;
-        }
-      } else {
-        assertTransition(task.status as Status, requested);
-        nextStatus = requested;
-      }
-    }
+    nextStatus = await resolveStatusChange(task, userId, body.status);
   }
 
   if (nextStatus !== null) {
