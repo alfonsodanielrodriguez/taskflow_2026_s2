@@ -52,4 +52,22 @@ describe('Tareas', () => {
 
     expect(res.body.items).toHaveLength(2);
   });
+
+  it('rechaza que un usuario ajeno elimine una tarea del proyecto', async () => {
+    const { token: ownerToken } = await registerUser('task-owner@test.com');
+    const { token: outsiderToken } = await registerUser('task-outsider@test.com');
+    const project = await createProject(ownerToken, 'Proyecto protegido');
+    const task = (
+      await request(app)
+        .post(`/api/projects/${project.id}/tasks`)
+        .set(auth(ownerToken))
+        .send({ title: 'Tarea protegida' })
+    ).body;
+
+    const res = await request(app)
+      .delete(`/api/tasks/${task.id}`)
+      .set(auth(outsiderToken));
+
+    expect(res.status).toBe(403);
+  });
 });
