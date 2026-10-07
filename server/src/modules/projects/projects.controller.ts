@@ -24,21 +24,42 @@ function serialize(p: {
   };
 }
 
-export async function create(req: Request, res: Response, next: NextFunction): Promise<void> {
+export async function create(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
   try {
     const userId = req.user!.userId;
-    const name = typeof req.body?.name === 'string' ? req.body.name.trim() : '';
-    if (name.length > 100) {
+    const name =
+      typeof req.body?.name === 'string' ? req.body.name.trim() : '';
+
+    if (name.length < 3 || name.length > 100) {
       throw badRequest('name must be between 3 and 100 characters');
     }
-    const description = assertOptionalString(req.body?.description, 'description', 500);
 
-    const duplicate = await db.project.findFirst({ where: { ownerId: userId, name } });
-    if (duplicate) throw conflict('You already have a project with that name');
+    const description = assertOptionalString(
+      req.body?.description,
+      'description',
+      500
+    );
+
+    const duplicate = await db.project.findFirst({
+      where: { ownerId: userId, name },
+    });
+
+    if (duplicate) {
+      throw conflict('You already have a project with that name');
+    }
 
     const project = await db.project.create({
-      data: { name, description: description ?? null, ownerId: userId },
+      data: {
+        name,
+        description: description ?? null,
+        ownerId: userId,
+      },
     });
+
     await db.projectMember.create({
       data: { projectId: project.id, userId, role: 'OWNER' },
     });
