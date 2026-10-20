@@ -79,7 +79,11 @@ El comando `db:setup` carga datos de ejemplo. Los tres usuarios comparten la con
 | `npm run db:setup` | Aplica las migraciones y carga los datos de ejemplo |
 | `npm run db:reset` | Borra la base y la vuelve a crear desde cero |
 | `npm test` | Corre la suite de tests |
+| `npm run test:contracts` | Genera los contratos Pact de login y comentarios y verifica la API |
 | `npm run test:coverage` | Corre la suite con reporte de cobertura |
+
+Los contratos se guardan en `server/pacts/`. La verificación del proveedor
+prepara los estados requeridos en una base SQLite aislada de pruebas.
 
 ## Frontend
 
