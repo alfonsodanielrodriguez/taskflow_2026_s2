@@ -13,14 +13,20 @@
     "db:setup": "npm --prefix server run db:setup",
     "db:reset": "npm --prefix server run db:reset",
     "test": "npm --prefix server test",
-    "test:contracts": "npm --prefix server run test:contracts",
+    "contracts:setup": "cross-env DATABASE_URL=file:./taskflow_test.db npm --prefix server run db:contracts:setup",
+    "test:contracts:consumer": "tsx contract-tests/consumer/contracts.test.ts",
+    "test:contracts:provider": "cross-env DATABASE_URL=file:./taskflow_test.db JWT_SECRET=test-secret tsx contract-tests/provider/verify.ts",
+    "test:contracts": "npm run contracts:setup && npm run test:contracts:consumer && npm run test:contracts:provider",
     "test:coverage": "npm --prefix server run test:coverage",
     "lint": "npm --prefix server run lint",
     "postinstall": "npm --prefix server install && npm --prefix client install"
   },
   "devDependencies": {
+    "@pact-foundation/pact": "^17.1.4",
     "@playwright/test": "^1.64.1",
-    "concurrently": "9.1.0"
+    "concurrently": "9.1.0",
+    "cross-env": "^7.0.3",
+    "tsx": "^4.23.15"
   },
   "engines": {
     "node": ">=20"

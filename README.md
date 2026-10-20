@@ -79,11 +79,16 @@ El comando `db:setup` carga datos de ejemplo. Los tres usuarios comparten la con
 | `npm run db:setup` | Aplica las migraciones y carga los datos de ejemplo |
 | `npm run db:reset` | Borra la base y la vuelve a crear desde cero |
 | `npm test` | Corre la suite de tests |
-| `npm run test:contracts` | Genera los contratos Pact de login y comentarios y verifica la API |
+| `npm run contracts:setup` | Reinicia y siembra la base aislada `taskflow_test` |
+| `npm run test:contracts:consumer` | Ejecuta el cliente contra el mock Pact y genera el contrato |
+| `npm run test:contracts:provider` | Levanta la API en el puerto 3001 y verifica el contrato |
+| `npm run test:contracts` | Ejecuta preparación, consumidor y proveedor en orden |
 | `npm run test:coverage` | Corre la suite con reporte de cobertura |
 
-Los contratos se guardan en `server/pacts/`. La verificación del proveedor
-prepara los estados requeridos en una base SQLite aislada de pruebas.
+Las pruebas de consumidor y proveedor están en `contract-tests/consumer/` y
+`contract-tests/provider/`. Los contratos se guardan en `contract-tests/pacts/`.
+El comando configura y siembra una base SQLite exclusiva para contratos en
+`server/prisma/taskflow_test.db`; no modifica `server/prisma/dev.db`.
 
 ## Frontend
 
