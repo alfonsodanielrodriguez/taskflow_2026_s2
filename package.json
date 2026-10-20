@@ -13,6 +13,7 @@
     "db:setup": "npm --prefix server run db:setup",
     "db:reset": "npm --prefix server run db:reset",
     "test": "npm --prefix server test",
+    "test:contracts": "npm --prefix server run test:contracts",
     "test:coverage": "npm --prefix server run test:coverage",
     "lint": "npm --prefix server run lint",
     "postinstall": "npm --prefix server install && npm --prefix client install"

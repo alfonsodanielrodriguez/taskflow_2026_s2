@@ -12,6 +12,7 @@
     "db:seed": "ts-node --transpile-only prisma/seed.ts",
     "db:seed:large": "ts-node --transpile-only prisma/seed-large.ts",
     "test": "jest --runInBand",
+    "test:contracts": "jest --runInBand tests/contracts.test.ts",
     "test:coverage": "jest --runInBand --coverage",
     "lint": "eslint src --ext .ts"
   },
@@ -23,6 +24,7 @@
     "jsonwebtoken": "9.0.2"
   },
   "devDependencies": {
+    "@pact-foundation/pact": "^17.1.4",
     "@types/bcryptjs": "2.4.6",
     "@types/cors": "2.8.17",
     "@types/express": "4.17.21",
