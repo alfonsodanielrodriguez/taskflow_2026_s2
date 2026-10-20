@@ -8,6 +8,7 @@ const CONTRACT_DIR = path.resolve(__dirname, '../pacts');
 const PROVIDER_URL = 'http://127.0.0.1:3001';
 const LOGIN_STATE = 'Ana existe con la contraseña de prueba';
 const COMMENTS_STATE = 'Ana es miembro de la tarea task-1, que tiene un comentario';
+const PROJECTS_STATE = 'Ana tiene al menos un proyecto activo';
 
 function listen(server: Server): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -44,6 +45,18 @@ async function verifySeededCommentsState(): Promise<void> {
   }
 }
 
+async function verifySeededProjectsState(): Promise<void> {
+  const ana = await db.user.findUnique({ where: { email: 'ana@test.com' } });
+  if (!ana) throw new Error('Falta Ana en la base taskflow_test; ejecutá npm run contracts:setup');
+
+  const project = await db.project.findFirst({
+    where: { ownerId: ana.id, archived: false },
+  });
+  if (!project) {
+    throw new Error('Falta un proyecto activo de Ana en taskflow_test; ejecutá npm run contracts:setup');
+  }
+}
+
 async function main(): Promise<void> {
   const app = createApp();
   const server = app.listen(3001, '127.0.0.1');
@@ -57,6 +70,7 @@ async function main(): Promise<void> {
       stateHandlers: {
         [LOGIN_STATE]: verifySeededLoginState,
         [COMMENTS_STATE]: verifySeededCommentsState,
+        [PROJECTS_STATE]: verifySeededProjectsState,
       },
     }).verifyProvider();
     console.log(`TaskFlowAPI verificada correctamente en ${PROVIDER_URL}`);

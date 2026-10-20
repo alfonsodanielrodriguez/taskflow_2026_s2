@@ -14,7 +14,7 @@
     "db:reset": "npm --prefix server run db:reset",
     "test": "npm --prefix server test",
     "contracts:setup": "cross-env DATABASE_URL=file:./taskflow_test.db npm --prefix server run db:contracts:setup",
-    "test:contracts:consumer": "tsx contract-tests/consumer/contracts.test.ts",
+    "test:contracts:consumer": "tsx contract-tests/consumer/contracts.test.ts && vitest run contract-tests/consumer/projects.pact.test.ts",
     "test:contracts:provider": "cross-env DATABASE_URL=file:./taskflow_test.db JWT_SECRET=test-secret tsx contract-tests/provider/verify.ts",
     "test:contracts": "npm run contracts:setup && npm run test:contracts:consumer && npm run test:contracts:provider",
     "test:coverage": "npm --prefix server run test:coverage",
@@ -26,7 +26,8 @@
     "@playwright/test": "^1.64.1",
     "concurrently": "9.1.0",
     "cross-env": "^7.0.3",
-    "tsx": "^4.23.15"
+    "tsx": "^4.23.15",
+    "vitest": "^3.2.4"
   },
   "engines": {
     "node": ">=20"
