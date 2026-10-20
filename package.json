@@ -18,6 +18,7 @@
     "postinstall": "npm --prefix server install && npm --prefix client install"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "concurrently": "9.1.0"
   },
   "engines": {
