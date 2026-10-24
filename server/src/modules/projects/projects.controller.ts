@@ -82,7 +82,10 @@ export async function list(req: Request, res: Response, next: NextFunction): Pro
       },
       orderBy: { createdAt: 'asc' },
     });
-    res.json(projects.map(serialize));
+    res.json(projects.map((project) => {
+    const { name, ...rest } = serialize(project);
+    return { ...rest, title: name };
+}));
   } catch (err) {
     next(err);
   }

@@ -44,7 +44,6 @@ async function verifySeededCommentsState(): Promise<void> {
     throw new Error('Falta el seed de comentarios en taskflow_test; ejecutá npm run contracts:setup');
   }
 }
-
 async function verifySeededProjectsState(): Promise<void> {
   const ana = await db.user.findUnique({ where: { email: 'ana@test.com' } });
   if (!ana) throw new Error('Falta Ana en la base taskflow_test; ejecutá npm run contracts:setup');
@@ -57,16 +56,30 @@ async function verifySeededProjectsState(): Promise<void> {
   }
 }
 
-async function main(): Promise<void> {
+export async function verifyProvider(): Promise<void> {
   const app = createApp();
   const server = app.listen(3001, '127.0.0.1');
-  await listen(server);
-
   try {
+    await listen(server);
+    const login = await fetch(`${PROVIDER_URL}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: 'ana@test.com', password: 'Password1' }),
+    });
+    if (!login.ok) throw new Error(`Login de Ana falló: HTTP ${login.status}`);
+    const { token } = (await login.json()) as { token: string };
+    if (!token) throw new Error('El login no devolvió un token');
+
     await new Verifier({
       provider: 'TaskFlowAPI',
       providerBaseUrl: PROVIDER_URL,
       pactUrls: [path.join(CONTRACT_DIR, 'TaskFlowWeb-TaskFlowAPI.json')],
+      requestFilter: (req, _res, next) => {
+        if (req.headers.authorization) {
+          req.headers.authorization = `Bearer ${token}`;
+        }
+        next();
+      },
       stateHandlers: {
         [LOGIN_STATE]: verifySeededLoginState,
         [COMMENTS_STATE]: verifySeededCommentsState,
@@ -79,8 +92,3 @@ async function main(): Promise<void> {
     await db.$disconnect();
   }
 }
-
-main().catch((error: unknown) => {
-  console.error(error);
-  process.exitCode = 1;
-});

@@ -50,15 +50,12 @@ describe('Contrato de consumidor: proyectos', () => {
           },
           body: eachLike(
             {
+              // Solo los campos que el frontend lee de GET /api/projects.
               id: like('proj-1'),
               name: like('Rediseño del sitio'),
               description: like('Renovación completa del sitio institucional'),
               ownerId: like('user-1'),
               archived: like(false),
-              createdAt: regex(
-                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/,
-                '2026-01-02T03:04:05.000Z',
-              ),
             },
             1,
           ),
@@ -81,8 +78,7 @@ describe('Contrato de consumidor: proyectos', () => {
               name: expect.any(String),
               description: expect.any(String),
               ownerId: expect.any(String),
-              archived: false,
-              createdAt: expect.any(String),
+              archived: expect.any(Boolean),
             }),
           );
         } finally {

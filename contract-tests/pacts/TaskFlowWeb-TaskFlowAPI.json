@@ -111,7 +111,6 @@
         "body": [
           {
             "archived": false,
-            "createdAt": "2026-01-02T03:04:05.000Z",
             "description": "Renovación completa del sitio institucional",
             "id": "proj-1",
             "name": "Rediseño del sitio",
@@ -137,15 +136,6 @@
               "matchers": [
                 {
                   "match": "type"
-                }
-              ]
-            },
-            "$[*].createdAt": {
-              "combine": "AND",
-              "matchers": [
-                {
-                  "match": "regex",
-                  "regex": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
                 }
               ]
             },

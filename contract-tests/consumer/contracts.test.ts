@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { describe, it } from 'vitest';
 import { createHmac } from 'node:crypto';
 import { MatchersV3, PactV3 } from '@pact-foundation/pact';
 import { api, setToken } from '../../client/src/lib/api';
@@ -151,12 +152,7 @@ async function verifyCommentsConsumerContract(): Promise<void> {
     });
 }
 
-async function main(): Promise<void> {
-  await verifyLoginConsumerContract();
-  await verifyCommentsConsumerContract();
-}
-
-main().catch((error: unknown) => {
-  console.error(error);
-  process.exitCode = 1;
+describe('Contratos de consumidor: login y comentarios', () => {
+  it('inicia sesión con las credenciales de Ana', verifyLoginConsumerContract);
+  it('obtiene los comentarios de task-1', verifyCommentsConsumerContract);
 });
