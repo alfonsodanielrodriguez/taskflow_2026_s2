@@ -34,3 +34,6 @@ Comandos, resultados y reportes JSON en [el registro de verificación](../eviden
 
 ## Causa observada
 formatDueDate usa getters locales sobre un timestamp almacenado en UTC.
+
+## Ticket publicado
+[GitHub issue #6](https://github.com/alfonsodanielrodriguez/taskflow_2026_s2/issues/6)

@@ -33,3 +33,6 @@ Comandos, resultados y reportes JSON en [el registro de verificación](../eviden
 
 ## Causa observada
 La ruta DELETE omite requireTaskProjectMember.
+
+## Ticket publicado
+[GitHub issue #4](https://github.com/alfonsodanielrodriguez/taskflow_2026_s2/issues/4)

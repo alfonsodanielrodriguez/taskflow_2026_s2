@@ -8,4 +8,4 @@ Resultado: 10 pasan y 3 fallan. US-15 crea etiquetas duplicadas al cambiar mayú
 
 Los cuatro bugs se reprodujeron 3/3 veces con TZ=America/Montevideo. US-16 no se reprodujo en UTC (0/3). Entorno, comandos exactos, severidad, JSON y ZIP de cada ejecución están en [el registro de evidencia](evidencia/README.md). Los reportes completos están en [docs/issues](issues/).
 
-Los archivos de issues son reportes listos para publicar. Su presencia no equivale a tickets de GitHub; la publicación debe registrarse con sus URL una vez realizada.
+Los cuatro tickets se publicaron en GitHub el 2026-11-17 con entorno, reproducibilidad, severidad y enlaces permanentes a los traces: [US-02 c5](https://github.com/alfonsodanielrodriguez/taskflow_2026_s2/issues/3), [US-13 c1](https://github.com/alfonsodanielrodriguez/taskflow_2026_s2/issues/4), [US-15](https://github.com/alfonsodanielrodriguez/taskflow_2026_s2/issues/5), [US-16](https://github.com/alfonsodanielrodriguez/taskflow_2026_s2/issues/6).

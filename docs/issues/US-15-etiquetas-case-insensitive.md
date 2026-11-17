@@ -33,3 +33,6 @@ Comandos, resultados y reportes JSON en [el registro de verificación](../eviden
 
 ## Causa observada
 addTag recorta espacios, pero no convierte a minúsculas y compara por igualdad exacta.
+
+## Ticket publicado
+[GitHub issue #5](https://github.com/alfonsodanielrodriguez/taskflow_2026_s2/issues/5)

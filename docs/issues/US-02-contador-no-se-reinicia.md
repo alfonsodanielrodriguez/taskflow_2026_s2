@@ -35,3 +35,6 @@ Comandos, resultados y reportes JSON en [el registro de verificación](../eviden
 
 ## Causa observada
 `auth.service.ts` solo limpia lockedUntil y conserva failedAttempts.
+
+## Ticket publicado
+[GitHub issue #3](https://github.com/alfonsodanielrodriguez/taskflow_2026_s2/issues/3)
