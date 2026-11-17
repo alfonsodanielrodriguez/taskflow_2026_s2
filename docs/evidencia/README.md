@@ -60,4 +60,3 @@ Reportes de las repeticiones: [Montevideo](montevideo.json), [UTC](utc.json). Tr
 - [task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat1.zip](traces/utc/task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat1.zip)
 - [task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat2.zip](traces/utc/task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat2.zip)
 - [task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora.zip](traces/utc/task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora.zip)
-
