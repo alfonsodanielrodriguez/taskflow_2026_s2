@@ -1,22 +1,35 @@
-# [BUG] US-15 agrega duplicados de etiquetas que solo difieren en mayúsculas
+# [BUG] US-15: etiquetas duplicadas al cambiar mayúsculas
 
 ## Historia y criterio
-US-15, criterios de aceptación 1, 2 y 3: normalizar las etiquetas a minúsculas, comparar sin distinguir mayúsculas y no permitir duplicados.
+US-15, criterios 1, 2 y 3.
 
 ## Pasos para reproducir
-1. Crear una tarea como miembro del proyecto.
-2. Enviar `POST /api/tasks/{taskId}/tags` con `{ "name": "Bug" }`.
-3. Enviar el mismo endpoint para esa tarea con `{ "name": "bug" }`.
+1. Abrir una tarea como miembro.
+2. Escribir Bug y pulsar Agregar etiqueta.
+3. Escribir bug y pulsar Agregar etiqueta.
 
 ## Resultado esperado
-La segunda solicitud devuelve HTTP 200 y la tarea conserva una única etiqueta, normalizada a `bug`.
+Una única etiqueta normalizada a bug; la segunda operación es idempotente.
 
 ## Resultado obtenido
-La segunda solicitud devuelve HTTP 201 y la tarea queda con dos etiquetas.
+La interfaz muestra dos chips: Bug y bug; la API crea ambas etiquetas.
 
-## Evidencia
-Falló `US-15 borde: repetir etiqueta ignorando mayúsculas no crea duplicado` al ejecutar `npx playwright test`: esperado 200, recibido 201. Implementación relacionada: `server/src/modules/tasks/tasks.service.ts`, función `addTag`.
+## Reproducibilidad
+3/3 ejecuciones con `TZ=America/Montevideo` y datos nuevos en cada intento, el 2026-11-17.
+Otras zonas horarias: no medidas.
+
+## Severidad
+Media: genera duplicados y hace inconsistentes la clasificación y los filtros.
 
 ## Entorno
-- macOS, Node.js 26.12.0, Playwright 1.64.1.
-- API local en `http://127.0.0.1:3000/api`.
+Windows, Node.js 24.14.0, npm 11.9.0, Playwright 1.64.1, Chromium 156.0.8078.4, SQLite aislada. Base: `c2563be` más esta rama.
+
+## Evidencia
+Comandos, resultados y reportes JSON en [el registro de verificación](../evidencia/README.md). Reproducciones de clase 5: `tests/e2e/bug-reproductions.spec.ts` (API); US-15 y US-16: `tests/e2e/task-stories.spec.ts` (UI).
+
+- [Trace task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado-repeat1](../evidencia/traces/montevideo/task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado-repeat1.zip)
+- [Trace task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado-repeat2](../evidencia/traces/montevideo/task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado-repeat2.zip)
+- [Trace task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado](../evidencia/traces/montevideo/task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado.zip)
+
+## Causa observada
+addTag recorta espacios, pero no convierte a minúsculas y compara por igualdad exacta.

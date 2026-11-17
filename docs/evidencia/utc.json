@@ -1,0 +1,235 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--grep",
+      "US-16 feliz",
+      "--repeat-each=3",
+      "--trace",
+      "on",
+      "--reporter=list,json",
+      "--output=test-results/utc"
+    ],
+    "configFile": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\playwright.config.ts",
+    "rootDir": "C:/Users/alfon/Documents/Codex/2026-11-17/puedes-ingresar-a-mi-repo-x20/work/taskflow_2026_s2/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/alfon/Documents/Codex/2026-11-17/puedes-ingresar-a-mi-repo-x20/work/taskflow_2026_s2/test-results/utc",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/alfon/Documents/Codex/2026-11-17/puedes-ingresar-a-mi-repo-x20/work/taskflow_2026_s2/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\utc",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e",
+        "snapshotDir": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5173",
+          "timezoneId": "UTC",
+          "trace": "on",
+          "browserName": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "task-stories.spec.ts",
+      "file": "task-stories.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "US-16 feliz: guarda el día calendario sin hora",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1673,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:52:52.172Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\utc\\task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b538dce994dcde4fa9ec-f1f7889957ce158904e7",
+          "file": "task-stories.spec.ts",
+          "line": 65,
+          "column": 5
+        },
+        {
+          "title": "US-16 feliz: guarda el día calendario sin hora",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1519,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:52:54.902Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\utc\\task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat1\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b538dce994dcde4fa9ec-598bfa3ace04fb608720",
+          "file": "task-stories.spec.ts",
+          "line": 65,
+          "column": 5
+        },
+        {
+          "title": "US-16 feliz: guarda el día calendario sin hora",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1528,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:52:57.535Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\utc\\task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat2\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b538dce994dcde4fa9ec-549dc3a2d8c39c135aef",
+          "file": "task-stories.spec.ts",
+          "line": 65,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-17T21:52:41.180Z",
+    "duration": 19210.299000000003,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

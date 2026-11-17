@@ -1,63 +1,31 @@
-# Consigna de ADR
+# ADR: App Actions y Component Objects para la automatización
 
-## 1. que arquitectura usa hoy el framework y donde
+Estado: aceptado. Fecha: 2026-11-17.
 
-La suite actual no aplica una arquitectura de automatizacion completa de manera formal. La mayoria de los tests realiza las solicitudes HTTP directamente dentro de cada caso mediante Supertest.
+## Contexto y estado actual
 
-Por ejemplo, en `server/tests/tasks.test.ts` y `server/tests/task-status.test.ts` aparecen directamente los pasos para crear usuarios, enviar solicitudes, configurar el token y validar las respuestas. Igual existe una aplicacion inicial del patron App Actions en `server/tests/helpers.ts`. Este archivo define acciones reutilizables que representan operaciones de la aplicacion:
-- `registerUser(...)`: registra un usuario.
-- `createProject(...)`: crea un proyecto.
-- `createTask(...)`: crea una tarea.
-- `auth(...)`: prepara la autenticacion de una solicitud.
+Las pruebas de integración usan Supertest. `server/tests/helpers.ts` contiene exactamente `registerUser`, `auth`, `createProject` y `createTask`, además de la instancia `app`. `tasks.test.ts` y `task-status.test.ts` ya consumen helpers, aunque conservan solicitudes directas para las operaciones bajo prueba. No existen todavía acciones de login, membresía, asignación, transición o comentarios en ese archivo.
 
-Estas funciones describen acciones del negocio y ocultan parte del detalle tecnico de Supertest.
+Los E2E antes ejecutaban solo solicitudes HTTP. Ahora `tests/e2e/fixtures/task.ts` prepara usuarios, proyecto, miembro y tarea por API, instala la sesión del navegador y abre el detalle. `setup` y `authenticated` viven en esa carpeta de fixtures. Los casos de historias realizan sus acciones y observaciones con `page` a través de `e2e/src/components/task-detail.ts`.
 
-## 2. Que patron conviene utilizar
+## Decisión
 
-Conviente utilizar el patron de App Actions porque cuando los tests representan operaciones o recorridos del usuario que pueden repetirse desde diferentes niveles, por ejemplo desde la API o desde la interfaz. La eleccion es parte de una practica que ya existe parcialmente en `server/tests/helpers.ts` y se ajusta al tipo de sistema donde una aplicacion con acciones de negocio repetidas, pruebas actuales de API y posibles pruebas futuras de interfaz se adapta al codigo.
+Mantener App Actions para la preparación por API y un Component Object `TaskDetail` para las interacciones reutilizables del editor: campos, guardado, etiquetas y recarga. Los asserts de negocio permanecen en los tests. La fixture limpia el proyecto al finalizar, incluso si el escenario falla; los usuarios tienen identificadores únicos en una base E2E aislada.
 
+La UI impide seleccionar usuarios externos y escribir fechas arbitrarias. Estos límites se prueban en el navegador; los contratos HTTP inválidos corresponden a Supertest. Editar el título por UI conserva los demás valores, pero no prueba la semántica PATCH de campos omitidos porque el formulario envía todos los campos.
 
-En codigo ya existen acciones de negocio claros y reutilizables:
-- Registrar o autenticar un usuario.
-- Crear un proyecto.
-- Agregar miembros.
-- Crear y asignar una tarea.
-- Cambiar el estado de una tarea.
-- Agregar comentarios.
+## Alternativas consideradas
 
-Esta arquitectura es adecuada para el proyecto por los siguientes criterios:
+| Alternativa | Beneficio | Motivo de la elección |
+| --- | --- | --- |
+| Page Object completo | Centraliza cada pantalla y navegación | Viable al crecer; hoy un componente del editor evita una clase de página demasiado amplia. |
+| Screenplay | Actores, tareas y capacidades reutilizables | Más abstracciones y formación de equipo para un sistema pequeño; no se justifica todavía. |
+| Solicitudes y selectores dentro de cada test | Arranque rápido | Duplica detalles técnicos y dificulta cambios de endpoints o selectores. |
 
-### Reutilizacion
-Las mismas acciones se repiten en varios archivos. Centralizarlas evita duplicar solicitudes, selectores y datos de preparacion.
+## Costos y consecuencias
 
-### Legibilidad
-Un test puede expresar la intencion del escenario con acciones como `createProject`, `createTask` o `changeTaskStatus`, sin mostrar en cada paso los detalles de URL, encabezados y formato de la solicitud.
+Hay más archivos que mantener y revisar: fixtures y componentes separados. Supertest y Playwright requieren helpers distintos porque sus contextos HTTP y ciclos de vida no son intercambiables; existe duplicación de preparación que debe mantenerse coherente. El Component Object depende de `data-testid`; cambios de UI requieren actualizarlo. Se conserva una sola capa pequeña, sin implementar acciones que ningún caso usa.
 
-### Mantenimiento
-Si cambia un endpoint, un selector o la forma de autenticacion, se actualiza la accion correspondiente en un unico lugar en vez de modificar todos los tests.
+## Verificación
 
-### Tamano del proyecto
-El sistema tiene varios flujos relacionados, pero no una complejidad que justifique una arquitectura mas pesada. App Actions aporta estructura sin introducir demasiadas clases o abstracciones.
-
-
-## 3. Proponer un cambio
-
-Se propone adoptar App Actions como arquitectura de automatizacion.
-
-Las acciones se organizaran por dominio:
-```text
-tests/
-|-- actions/
-|   |-- auth.actions.ts
-|   |-- project.actions.ts
-|   |-- task.actions.ts
-|   `-- comment.actions.ts
-|-- auth.test.ts
-|-- projects.test.ts
-|-- tasks.test.ts
-`-- comments.test.ts
-```
-
-Cada archivo de acciones concentrara operaciones completas de la aplicacion. Por ejemplo, `task.actions.ts` podra exponer `createTask`, `assignTask`, `changeTaskStatus` y `addTaskComment`.
-Los tests conservaran las validaciones y los datos propios de cada escenario, pero dejaran de repetir los detalles tecnicos necesarios para ejecutar una accion.
-
+`npm test`, `npm run test:coverage` y `npx playwright test --trace on`. Los jobs independientes de CI permiten ver fallos de producto sin ocultar compilación, lint o cobertura. Las expectativas de bugs conocidos no se deshabilitan.

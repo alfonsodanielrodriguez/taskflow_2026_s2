@@ -1,0 +1,951 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--grep",
+      "US-02|US-13|US-15 borde|US-16 feliz",
+      "--repeat-each=3",
+      "--trace",
+      "on",
+      "--reporter=list,json",
+      "--output=test-results/montevideo"
+    ],
+    "configFile": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\playwright.config.ts",
+    "rootDir": "C:/Users/alfon/Documents/Codex/2026-11-17/puedes-ingresar-a-mi-repo-x20/work/taskflow_2026_s2/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/alfon/Documents/Codex/2026-11-17/puedes-ingresar-a-mi-repo-x20/work/taskflow_2026_s2/test-results/montevideo",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/alfon/Documents/Codex/2026-11-17/puedes-ingresar-a-mi-repo-x20/work/taskflow_2026_s2/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e",
+        "snapshotDir": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5173",
+          "timezoneId": "America/Montevideo",
+          "trace": "on",
+          "browserName": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "bug-reproductions.spec.ts",
+      "file": "bug-reproductions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "US-02 c5 API: successful login resets failed attempts",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2243,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:16:29",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                      "column": 29,
+                      "line": 16
+                    },
+                    "snippet": "  14 |   for (let n = 0; n < 3; n++) await fail();\n  15 |   const response = await page.request.post('/api/auth/login', { data: credentials });\n> 16 |   expect(response.status()).toBe(200);\n     |                             ^\n  17 | });\n  18 |\n  19 | test('US-13 c1 API: an outsider cannot delete a task', async ({ page, scenario }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                        "column": 29,
+                        "line": 16
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m\n\n  14 |   for (let n = 0; n < 3; n++) await fail();\n  15 |   const response = await page.request.post('/api/auth/login', { data: credentials });\n> 16 |   expect(response.status()).toBe(200);\n     |                             ^\n  17 | });\n  18 |\n  19 | test('US-13 c1 API: an outsider cannot delete a task', async ({ page, scenario }) => {\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:16:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:11.076Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-02-c5-f4aae-ogin-resets-failed-attempts\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-02-c5-f4aae-ogin-resets-failed-attempts\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                    "column": 29,
+                    "line": 16
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "17ab268ca6dccd54e9e6-908a33cf5ea180c8e158",
+          "file": "bug-reproductions.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "US-13 c1 API: an outsider cannot delete a task",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1148,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m403\u001b[39m\nReceived: \u001b[31m204\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m403\u001b[39m\nReceived: \u001b[31m204\u001b[39m\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:24:29",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                      "column": 29,
+                      "line": 24
+                    },
+                    "snippet": "  22 |   const outsider = await registration.json();\n  23 |   const response = await page.request.delete(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${outsider.token}` } });\n> 24 |   expect(response.status()).toBe(403);\n     |                             ^\n  25 |   expect((await response.json()).error.code).toBe('FORBIDDEN');\n  26 |   const detail = await page.request.get(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${scenario.token}` } });\n  27 |   expect(detail.status()).toBe(200);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                        "column": 29,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m403\u001b[39m\nReceived: \u001b[31m204\u001b[39m\n\n  22 |   const outsider = await registration.json();\n  23 |   const response = await page.request.delete(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${outsider.token}` } });\n> 24 |   expect(response.status()).toBe(403);\n     |                             ^\n  25 |   expect((await response.json()).error.code).toBe('FORBIDDEN');\n  26 |   const detail = await page.request.get(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${scenario.token}` } });\n  27 |   expect(detail.status()).toBe(200);\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:24:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:14.540Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-13-c1-f233a-tsider-cannot-delete-a-task\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-13-c1-f233a-tsider-cannot-delete-a-task\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                    "column": 29,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "17ab268ca6dccd54e9e6-17d52cdf6854de650db8",
+          "file": "bug-reproductions.spec.ts",
+          "line": 19,
+          "column": 5
+        },
+        {
+          "title": "US-02 c5 API: successful login resets failed attempts",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1878,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:16:29",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                      "column": 29,
+                      "line": 16
+                    },
+                    "snippet": "  14 |   for (let n = 0; n < 3; n++) await fail();\n  15 |   const response = await page.request.post('/api/auth/login', { data: credentials });\n> 16 |   expect(response.status()).toBe(200);\n     |                             ^\n  17 | });\n  18 |\n  19 | test('US-13 c1 API: an outsider cannot delete a task', async ({ page, scenario }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                        "column": 29,
+                        "line": 16
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m\n\n  14 |   for (let n = 0; n < 3; n++) await fail();\n  15 |   const response = await page.request.post('/api/auth/login', { data: credentials });\n> 16 |   expect(response.status()).toBe(200);\n     |                             ^\n  17 | });\n  18 |\n  19 | test('US-13 c1 API: an outsider cannot delete a task', async ({ page, scenario }) => {\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:16:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:33.692Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-02-c5-f4aae-ogin-resets-failed-attempts-repeat1\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-02-c5-f4aae-ogin-resets-failed-attempts-repeat1\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                    "column": 29,
+                    "line": 16
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "17ab268ca6dccd54e9e6-68618b6eb40f451a703d",
+          "file": "bug-reproductions.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "US-13 c1 API: an outsider cannot delete a task",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 960,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m403\u001b[39m\nReceived: \u001b[31m204\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m403\u001b[39m\nReceived: \u001b[31m204\u001b[39m\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:24:29",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                      "column": 29,
+                      "line": 24
+                    },
+                    "snippet": "  22 |   const outsider = await registration.json();\n  23 |   const response = await page.request.delete(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${outsider.token}` } });\n> 24 |   expect(response.status()).toBe(403);\n     |                             ^\n  25 |   expect((await response.json()).error.code).toBe('FORBIDDEN');\n  26 |   const detail = await page.request.get(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${scenario.token}` } });\n  27 |   expect(detail.status()).toBe(200);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                        "column": 29,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m403\u001b[39m\nReceived: \u001b[31m204\u001b[39m\n\n  22 |   const outsider = await registration.json();\n  23 |   const response = await page.request.delete(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${outsider.token}` } });\n> 24 |   expect(response.status()).toBe(403);\n     |                             ^\n  25 |   expect((await response.json()).error.code).toBe('FORBIDDEN');\n  26 |   const detail = await page.request.get(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${scenario.token}` } });\n  27 |   expect(detail.status()).toBe(200);\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:24:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:36.765Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-13-c1-f233a-tsider-cannot-delete-a-task-repeat1\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-13-c1-f233a-tsider-cannot-delete-a-task-repeat1\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                    "column": 29,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "17ab268ca6dccd54e9e6-1bffc6a5f43d09a542d8",
+          "file": "bug-reproductions.spec.ts",
+          "line": 19,
+          "column": 5
+        },
+        {
+          "title": "US-02 c5 API: successful login resets failed attempts",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1575,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:16:29",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                      "column": 29,
+                      "line": 16
+                    },
+                    "snippet": "  14 |   for (let n = 0; n < 3; n++) await fail();\n  15 |   const response = await page.request.post('/api/auth/login', { data: credentials });\n> 16 |   expect(response.status()).toBe(200);\n     |                             ^\n  17 | });\n  18 |\n  19 | test('US-13 c1 API: an outsider cannot delete a task', async ({ page, scenario }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                        "column": 29,
+                        "line": 16
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m\n\n  14 |   for (let n = 0; n < 3; n++) await fail();\n  15 |   const response = await page.request.post('/api/auth/login', { data: credentials });\n> 16 |   expect(response.status()).toBe(200);\n     |                             ^\n  17 | });\n  18 |\n  19 | test('US-13 c1 API: an outsider cannot delete a task', async ({ page, scenario }) => {\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:16:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:55.377Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-02-c5-f4aae-ogin-resets-failed-attempts-repeat2\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-02-c5-f4aae-ogin-resets-failed-attempts-repeat2\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                    "column": 29,
+                    "line": 16
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "17ab268ca6dccd54e9e6-049954bcc74b7f31f89f",
+          "file": "bug-reproductions.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "US-13 c1 API: an outsider cannot delete a task",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1166,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m403\u001b[39m\nReceived: \u001b[31m204\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m403\u001b[39m\nReceived: \u001b[31m204\u001b[39m\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:24:29",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                      "column": 29,
+                      "line": 24
+                    },
+                    "snippet": "  22 |   const outsider = await registration.json();\n  23 |   const response = await page.request.delete(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${outsider.token}` } });\n> 24 |   expect(response.status()).toBe(403);\n     |                             ^\n  25 |   expect((await response.json()).error.code).toBe('FORBIDDEN');\n  26 |   const detail = await page.request.get(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${scenario.token}` } });\n  27 |   expect(detail.status()).toBe(200);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                        "column": 29,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m403\u001b[39m\nReceived: \u001b[31m204\u001b[39m\n\n  22 |   const outsider = await registration.json();\n  23 |   const response = await page.request.delete(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${outsider.token}` } });\n> 24 |   expect(response.status()).toBe(403);\n     |                             ^\n  25 |   expect((await response.json()).error.code).toBe('FORBIDDEN');\n  26 |   const detail = await page.request.get(`/api/tasks/${scenario.taskId}`, { headers: { Authorization: `Bearer ${scenario.token}` } });\n  27 |   expect(detail.status()).toBe(200);\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts:24:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:58.335Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-13-c1-f233a-tsider-cannot-delete-a-task-repeat2\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\bug-reproductions-US-13-c1-f233a-tsider-cannot-delete-a-task-repeat2\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\bug-reproductions.spec.ts",
+                    "column": 29,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "17ab268ca6dccd54e9e6-a0c19fa790d5ad16c6a7",
+          "file": "bug-reproductions.spec.ts",
+          "line": 19,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "task-stories.spec.ts",
+      "file": "task-stories.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "US-15 borde: repetir etiqueta ignorando mayúsculas no crea duplicado",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7131,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('tag-chip')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('tag-chip') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('tag-chip')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('tag-chip')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('tag-chip') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('tag-chip')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:62:46",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                      "column": 46,
+                      "line": 62
+                    },
+                    "snippet": "  60 |   await task.addTag('Bug');\n  61 |   await task.addTag('bug');\n> 62 |   await expect(page.getByTestId('tag-chip')).toHaveCount(1);\n     |                                              ^\n  63 |   await expect(page.getByTestId('tag-chip-name')).toHaveText('bug');\n  64 | });\n  65 | test('US-16 feliz: guarda el día calendario sin hora', async ({ task }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                        "column": 46,
+                        "line": 62
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('tag-chip')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('tag-chip') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('tag-chip')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n\n  60 |   await task.addTag('Bug');\n  61 |   await task.addTag('bug');\n> 62 |   await expect(page.getByTestId('tag-chip')).toHaveCount(1);\n     |                                              ^\n  63 |   await expect(page.getByTestId('tag-chip-name')).toHaveText('bug');\n  64 | });\n  65 | test('US-16 feliz: guarda el día calendario sin hora', async ({ task }) => {\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:62:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:16.885Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                    "column": 46,
+                    "line": 62
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b538dce994dcde4fa9ec-302f72a4e1f2b10f3dfb",
+          "file": "task-stories.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "US-16 feliz: guarda el día calendario sin hora",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6682,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('task-duedate-value')\nExpected: \u001b[32m\"2026-09-1\u001b[7m5\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-09-1\u001b[7m4\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('task-duedate-value') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('task-duedate-value')\u001b[22m\n\u001b[2m    14 × locator resolved to <span data-testid=\"task-duedate-value\">2026-09-14</span>\u001b[22m\n\u001b[2m       - unexpected value \"2026-09-14\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('task-duedate-value')\nExpected: \u001b[32m\"2026-09-1\u001b[7m5\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-09-1\u001b[7m4\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('task-duedate-value') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('task-duedate-value')\u001b[22m\n\u001b[2m    14 × locator resolved to <span data-testid=\"task-duedate-value\">2026-09-14</span>\u001b[22m\n\u001b[2m       - unexpected value \"2026-09-14\"\u001b[22m\n\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:69:45",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                      "column": 45,
+                      "line": 69
+                    },
+                    "snippet": "  67 |   await task.save();\n  68 |   await task.reload();\n> 69 |   await expect(task.field('duedate-value')).toHaveText('2026-09-15');\n     |                                             ^\n  70 | });\n  71 | test('US-16 error: el control de fecha impide texto inválido', async ({ task }) => {\n  72 |   // Native date inputs reject non-ISO text before any HTTP request."
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                        "column": 45,
+                        "line": 69
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('task-duedate-value')\nExpected: \u001b[32m\"2026-09-1\u001b[7m5\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-09-1\u001b[7m4\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('task-duedate-value') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('task-duedate-value')\u001b[22m\n\u001b[2m    14 × locator resolved to <span data-testid=\"task-duedate-value\">2026-09-14</span>\u001b[22m\n\u001b[2m       - unexpected value \"2026-09-14\"\u001b[22m\n\n\n  67 |   await task.save();\n  68 |   await task.reload();\n> 69 |   await expect(task.field('duedate-value')).toHaveText('2026-09-15');\n     |                                             ^\n  70 | });\n  71 | test('US-16 error: el control de fecha impide texto inválido', async ({ task }) => {\n  72 |   // Native date inputs reject non-ISO text before any HTTP request.\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:69:45"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:25.239Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                    "column": 45,
+                    "line": 69
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b538dce994dcde4fa9ec-f1f7889957ce158904e7",
+          "file": "task-stories.spec.ts",
+          "line": 65,
+          "column": 5
+        },
+        {
+          "title": "US-15 borde: repetir etiqueta ignorando mayúsculas no crea duplicado",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7048,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('tag-chip')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('tag-chip') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('tag-chip')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('tag-chip')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('tag-chip') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('tag-chip')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:62:46",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                      "column": 46,
+                      "line": 62
+                    },
+                    "snippet": "  60 |   await task.addTag('Bug');\n  61 |   await task.addTag('bug');\n> 62 |   await expect(page.getByTestId('tag-chip')).toHaveCount(1);\n     |                                              ^\n  63 |   await expect(page.getByTestId('tag-chip-name')).toHaveText('bug');\n  64 | });\n  65 | test('US-16 feliz: guarda el día calendario sin hora', async ({ task }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                        "column": 46,
+                        "line": 62
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('tag-chip')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('tag-chip') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('tag-chip')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n\n  60 |   await task.addTag('Bug');\n  61 |   await task.addTag('bug');\n> 62 |   await expect(page.getByTestId('tag-chip')).toHaveCount(1);\n     |                                              ^\n  63 |   await expect(page.getByTestId('tag-chip-name')).toHaveText('bug');\n  64 | });\n  65 | test('US-16 feliz: guarda el día calendario sin hora', async ({ task }) => {\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:62:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:38.926Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado-repeat1\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado-repeat1\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                    "column": 46,
+                    "line": 62
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b538dce994dcde4fa9ec-c4062a45174839253256",
+          "file": "task-stories.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "US-16 feliz: guarda el día calendario sin hora",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6957,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('task-duedate-value')\nExpected: \u001b[32m\"2026-09-1\u001b[7m5\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-09-1\u001b[7m4\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('task-duedate-value') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('task-duedate-value')\u001b[22m\n\u001b[2m    14 × locator resolved to <span data-testid=\"task-duedate-value\">2026-09-14</span>\u001b[22m\n\u001b[2m       - unexpected value \"2026-09-14\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('task-duedate-value')\nExpected: \u001b[32m\"2026-09-1\u001b[7m5\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-09-1\u001b[7m4\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('task-duedate-value') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('task-duedate-value')\u001b[22m\n\u001b[2m    14 × locator resolved to <span data-testid=\"task-duedate-value\">2026-09-14</span>\u001b[22m\n\u001b[2m       - unexpected value \"2026-09-14\"\u001b[22m\n\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:69:45",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                      "column": 45,
+                      "line": 69
+                    },
+                    "snippet": "  67 |   await task.save();\n  68 |   await task.reload();\n> 69 |   await expect(task.field('duedate-value')).toHaveText('2026-09-15');\n     |                                             ^\n  70 | });\n  71 | test('US-16 error: el control de fecha impide texto inválido', async ({ task }) => {\n  72 |   // Native date inputs reject non-ISO text before any HTTP request."
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                        "column": 45,
+                        "line": 69
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('task-duedate-value')\nExpected: \u001b[32m\"2026-09-1\u001b[7m5\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-09-1\u001b[7m4\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('task-duedate-value') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('task-duedate-value')\u001b[22m\n\u001b[2m    14 × locator resolved to <span data-testid=\"task-duedate-value\">2026-09-14</span>\u001b[22m\n\u001b[2m       - unexpected value \"2026-09-14\"\u001b[22m\n\n\n  67 |   await task.save();\n  68 |   await task.reload();\n> 69 |   await expect(task.field('duedate-value')).toHaveText('2026-09-15');\n     |                                             ^\n  70 | });\n  71 | test('US-16 error: el control de fecha impide texto inválido', async ({ task }) => {\n  72 |   // Native date inputs reject non-ISO text before any HTTP request.\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:69:45"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:51:47.242Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat1\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat1\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                    "column": 45,
+                    "line": 69
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b538dce994dcde4fa9ec-598bfa3ace04fb608720",
+          "file": "task-stories.spec.ts",
+          "line": 65,
+          "column": 5
+        },
+        {
+          "title": "US-15 borde: repetir etiqueta ignorando mayúsculas no crea duplicado",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6721,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('tag-chip')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('tag-chip') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('tag-chip')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('tag-chip')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('tag-chip') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('tag-chip')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:62:46",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                      "column": 46,
+                      "line": 62
+                    },
+                    "snippet": "  60 |   await task.addTag('Bug');\n  61 |   await task.addTag('bug');\n> 62 |   await expect(page.getByTestId('tag-chip')).toHaveCount(1);\n     |                                              ^\n  63 |   await expect(page.getByTestId('tag-chip-name')).toHaveText('bug');\n  64 | });\n  65 | test('US-16 feliz: guarda el día calendario sin hora', async ({ task }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                        "column": 46,
+                        "line": 62
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('tag-chip')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('tag-chip') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('tag-chip')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n\n  60 |   await task.addTag('Bug');\n  61 |   await task.addTag('bug');\n> 62 |   await expect(page.getByTestId('tag-chip')).toHaveCount(1);\n     |                                              ^\n  63 |   await expect(page.getByTestId('tag-chip-name')).toHaveText('bug');\n  64 | });\n  65 | test('US-16 feliz: guarda el día calendario sin hora', async ({ task }) => {\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:62:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:52:00.768Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado-repeat2\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-15-borde-r-a7272-ayúsculas-no-crea-duplicado-repeat2\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                    "column": 46,
+                    "line": 62
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b538dce994dcde4fa9ec-d9a8f8fd97d898043f99",
+          "file": "task-stories.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "US-16 feliz: guarda el día calendario sin hora",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6701,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('task-duedate-value')\nExpected: \u001b[32m\"2026-09-1\u001b[7m5\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-09-1\u001b[7m4\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('task-duedate-value') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('task-duedate-value')\u001b[22m\n\u001b[2m    13 × locator resolved to <span data-testid=\"task-duedate-value\">2026-09-14</span>\u001b[22m\n\u001b[2m       - unexpected value \"2026-09-14\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('task-duedate-value')\nExpected: \u001b[32m\"2026-09-1\u001b[7m5\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-09-1\u001b[7m4\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('task-duedate-value') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('task-duedate-value')\u001b[22m\n\u001b[2m    13 × locator resolved to <span data-testid=\"task-duedate-value\">2026-09-14</span>\u001b[22m\n\u001b[2m       - unexpected value \"2026-09-14\"\u001b[22m\n\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:69:45",
+                    "location": {
+                      "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                      "column": 45,
+                      "line": 69
+                    },
+                    "snippet": "  67 |   await task.save();\n  68 |   await task.reload();\n> 69 |   await expect(task.field('duedate-value')).toHaveText('2026-09-15');\n     |                                             ^\n  70 | });\n  71 | test('US-16 error: el control de fecha impide texto inválido', async ({ task }) => {\n  72 |   // Native date inputs reject non-ISO text before any HTTP request."
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                        "column": 45,
+                        "line": 69
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('task-duedate-value')\nExpected: \u001b[32m\"2026-09-1\u001b[7m5\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-09-1\u001b[7m4\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('task-duedate-value') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('task-duedate-value')\u001b[22m\n\u001b[2m    13 × locator resolved to <span data-testid=\"task-duedate-value\">2026-09-14</span>\u001b[22m\n\u001b[2m       - unexpected value \"2026-09-14\"\u001b[22m\n\n\n  67 |   await task.save();\n  68 |   await task.reload();\n> 69 |   await expect(task.field('duedate-value')).toHaveText('2026-09-15');\n     |                                             ^\n  70 | });\n  71 | test('US-16 error: el control de fecha impide texto inválido', async ({ task }) => {\n  72 |   // Native date inputs reject non-ISO text before any HTTP request.\n    at C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts:69:45"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-17T21:52:08.804Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat2\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\test-results\\montevideo\\task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat2\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alfon\\Documents\\Codex\\2026-11-17\\puedes-ingresar-a-mi-repo-x20\\work\\taskflow_2026_s2\\tests\\e2e\\task-stories.spec.ts",
+                    "column": 45,
+                    "line": 69
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b538dce994dcde4fa9ec-549dc3a2d8c39c135aef",
+          "file": "task-stories.spec.ts",
+          "line": 65,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-17T21:50:57.206Z",
+    "duration": 79799.195,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 12,
+    "flaky": 0
+  }
+}

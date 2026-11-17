@@ -11,7 +11,11 @@ describe('Autorización de cambios de estado', () => {
     const task = await createTask(owner.token, project.id, { title: 'Tarea de estados' });
 
     await request(app).patch(`/api/tasks/${task.id}`).set(auth(member.token))
-      .send({ status: 'IN_PROGRESS' }).expect(403);
+      .send({ status: 'IN_PROGRESS' }).expect(403)
+      .expect(res => {
+        expect(res.body.error).toEqual(expect.objectContaining({ code: 'FORBIDDEN', message: expect.any(String), details: expect.any(Array) }));
+        expect(res.body.error.message.length).toBeGreaterThan(0);
+      });
     await request(app).patch(`/api/tasks/${task.id}`).set(auth(owner.token))
       .send({ status: 'IN_PROGRESS' }).expect(200);
 
@@ -23,7 +27,11 @@ describe('Autorización de cambios de estado', () => {
     await request(app).patch(`/api/tasks/${task.id}`).set(auth(member.token))
       .send({ status: 'DONE' }).expect(200);
     await request(app).patch(`/api/tasks/${task.id}`).set(auth(owner.token))
-      .send({ status: 'TODO' }).expect(422);
+      .send({ status: 'TODO' }).expect(422)
+      .expect(res => {
+        expect(res.body.error).toEqual(expect.objectContaining({ code: 'INVALID_TRANSITION', message: expect.any(String), details: expect.any(Array) }));
+        expect(res.body.error.message.length).toBeGreaterThan(0);
+      });
 
     const history = await request(app).get(`/api/tasks/${task.id}/history`)
       .set(auth(owner.token)).expect(200);
