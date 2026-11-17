@@ -26,6 +26,8 @@ describe('Proyectos', () => {
       .send({ name: 'Proyecto duplicado' });
 
     expect(res.status).toBe(409);
+    expect(res.body.error).toEqual(expect.objectContaining({ code: 'CONFLICT', message: expect.any(String), details: expect.any(Array) }));
+    expect(res.body.error.message.length).toBeGreaterThan(0);
     expect(res.body.error.message).toBe('You already have a project with that name');
   });
 
@@ -43,5 +45,7 @@ describe('Proyectos', () => {
     const res = await request(app).post('/api/projects').send({ name: 'Sin token' });
 
     expect(res.status).toBe(401);
+    expect(res.body.error).toEqual(expect.objectContaining({ code: 'UNAUTHORIZED', message: expect.any(String), details: expect.any(Array) }));
+    expect(res.body.error.message.length).toBeGreaterThan(0);
   });
 });

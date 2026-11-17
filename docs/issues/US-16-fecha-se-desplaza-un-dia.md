@@ -1,22 +1,39 @@
-# [BUG] US-16 devuelve la fecha de vencimiento un día antes
+# [BUG] US-16: el vencimiento se desplaza un día en Montevideo
 
 ## Historia y criterio
-US-16, criterios de aceptación 1, 2 y 3: la fecha es un día calendario, se devuelve en formato `YYYY-MM-DD` y no cambia según la zona horaria.
+US-16, criterios 1, 2 y 3.
 
 ## Pasos para reproducir
-1. Crear una tarea como miembro del proyecto.
-2. Enviar `PATCH /api/tasks/{taskId}` con `{ "dueDate": "2026-09-15" }`.
-3. Inspeccionar el campo `dueDate` de la respuesta.
+1. Iniciar servidor con TZ=America/Montevideo.
+2. Abrir una tarea y seleccionar 2026-09-15 como vencimiento.
+3. Guardar y recargar el detalle.
+4. Repetir con TZ=UTC reiniciando el servidor.
 
 ## Resultado esperado
-La respuesta devuelve `dueDate: "2026-09-15"`.
+Se muestra 2026-09-15 en ambas zonas horarias.
 
 ## Resultado obtenido
-La respuesta devuelve `dueDate: "2026-09-14"`. Con `2000-01-01`, también devuelve el día anterior (`1999-12-31`).
+Montevideo: 2026-09-14. UTC: 2026-09-15. Una fecha pasada 2000-01-01 también vuelve 1999-12-31 en Montevideo.
 
-## Evidencia
-Fallaron `US-16 feliz: guarda la fecha como día calendario sin hora` y `US-16 borde: acepta fechas pasadas` en `npx playwright test`. Implementación relacionada: `server/src/lib/ids.ts`, funciones `parseDueDate` y `formatDueDate`.
+## Reproducibilidad
+3/3 ejecuciones con `TZ=America/Montevideo` y datos nuevos en cada intento, el 2026-11-17.
+Con `TZ=UTC`: 0/3 reproducciones; las tres pruebas pasan.
+
+## Severidad
+Media: adelanta el vencimiento visible y puede provocar decisiones erróneas de planificación.
 
 ## Entorno
-- macOS, Node.js 26.12.0, Playwright 1.64.1.
-- API local en `http://127.0.0.1:3000/api`.
+Windows, Node.js 24.14.0, npm 11.9.0, Playwright 1.64.1, Chromium 156.0.8078.4, SQLite aislada. Base: `c2563be` más esta rama.
+
+## Evidencia
+Comandos, resultados y reportes JSON en [el registro de verificación](../evidencia/README.md). Reproducciones de clase 5: `tests/e2e/bug-reproductions.spec.ts` (API); US-15 y US-16: `tests/e2e/task-stories.spec.ts` (UI).
+
+- [Trace task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat1](../evidencia/traces/montevideo/task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat1.zip)
+- [Trace task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat2](../evidencia/traces/montevideo/task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora-repeat2.zip)
+- [Trace task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora](../evidencia/traces/montevideo/task-stories-US-16-feliz-guarda-el-día-calendario-sin-hora.zip)
+
+## Causa observada
+formatDueDate usa getters locales sobre un timestamp almacenado en UTC.
+
+## Ticket publicado
+[GitHub issue #6](https://github.com/alfonsodanielrodriguez/taskflow_2026_s2/issues/6)

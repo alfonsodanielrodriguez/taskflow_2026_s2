@@ -32,6 +32,8 @@ describe('Auth', () => {
       .send({ email: 'wrong@test.com', password: 'Otracosa9' });
 
     expect(res.status).toBe(401);
+    expect(res.body.error).toEqual(expect.objectContaining({ code: 'UNAUTHORIZED', message: expect.any(String), details: expect.any(Array) }));
+    expect(res.body.error.message.length).toBeGreaterThan(0);
   });
 
   it('reinicia el contador de intentos fallidos después de un login exitoso', async () => {
@@ -43,7 +45,11 @@ describe('Auth', () => {
       await request(app)
         .post('/api/auth/login')
         .send({ email: 'counter-reset@test.com', password: 'Wrongpass1' })
-        .expect(401);
+        .expect(401)
+      .expect(res => {
+        expect(res.body.error).toEqual(expect.objectContaining({ code: 'UNAUTHORIZED', message: expect.any(String), details: expect.any(Array) }));
+        expect(res.body.error.message.length).toBeGreaterThan(0);
+      });
     }
 
     await request(app)
@@ -55,7 +61,11 @@ describe('Auth', () => {
       await request(app)
         .post('/api/auth/login')
         .send({ email: 'counter-reset@test.com', password: 'Wrongpass1' })
-        .expect(401);
+        .expect(401)
+      .expect(res => {
+        expect(res.body.error).toEqual(expect.objectContaining({ code: 'UNAUTHORIZED', message: expect.any(String), details: expect.any(Array) }));
+        expect(res.body.error.message.length).toBeGreaterThan(0);
+      });
     }
 
     const res = await request(app)

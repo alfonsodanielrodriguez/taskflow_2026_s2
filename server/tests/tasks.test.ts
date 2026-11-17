@@ -69,5 +69,7 @@ describe('Tareas', () => {
       .set(auth(outsiderToken));
 
     expect(res.status).toBe(403);
+    expect(res.body.error).toEqual(expect.objectContaining({ code: 'FORBIDDEN', message: expect.any(String), details: expect.any(Array) }));
+    expect(res.body.error.message.length).toBeGreaterThan(0);
   });
 });

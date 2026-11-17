@@ -17,7 +17,11 @@ describe('Validación de asignados', () => {
       const updated = await request(app).patch(`/api/tasks/${task.id}`)
         .set(auth(owner.token)).send({ assigneeId });
       expect(created.status).toBe(400);
+    expect(created.body.error).toEqual(expect.objectContaining({ code: 'VALIDATION_ERROR', message: expect.any(String), details: expect.any(Array) }));
+    expect(created.body.error.message.length).toBeGreaterThan(0);
       expect(updated.status).toBe(400);
+    expect(updated.body.error).toEqual(expect.objectContaining({ code: 'VALIDATION_ERROR', message: expect.any(String), details: expect.any(Array) }));
+    expect(updated.body.error.message.length).toBeGreaterThan(0);
     }
 
     const unchanged = await request(app).patch(`/api/tasks/${task.id}`)
