@@ -184,19 +184,27 @@ export async function addTag(taskId: number, rawName: unknown) {
   if (typeof rawName !== 'string' || rawName.trim().length < 1 || rawName.trim().length > 30) {
     throw badRequest('Tag name must be between 1 and 30 characters');
   }
-  const name = rawName.trim();
+  const name = rawName.trim().toLowerCase();
 
-  const current = await db.taskTag.count({ where: { taskId } });
-  if (current >= MAX_TAGS_PER_TASK) {
-    throw badRequest(`A task can have at most ${MAX_TAGS_PER_TASK} tags`);
-  }
-
-  let tag = await db.tag.findFirst({ where: { name } });
-  if (!tag) tag = await db.tag.create({ data: { name } });
-
-  await db.taskTag.create({ data: { taskId, tagId: tag.id } });
-
-  return { id: toPublicId('tag', tag.id), name: tag.name };
+  return db.$transaction(async (tx) => {
+    const links = await tx.taskTag.findMany({ where: { taskId }, include: { tag: true } });
+    // Check for an existing tag before enforcing the limit: retries are idempotent.
+    // Normalizing the comparison also recognizes tags saved before this fix.
+    const existing = links.find((link) => link.tag.name.trim().toLowerCase() === name);
+    if (existing) {
+      if (existing.tag.name !== name) {
+        await tx.tag.update({ where: { id: existing.tag.id }, data: { name } });
+      }
+      return { tag: { id: toPublicId('tag', existing.tag.id), name }, created: false };
+    }
+    if (links.length >= MAX_TAGS_PER_TASK) {
+      throw badRequest(`A task can have at most ${MAX_TAGS_PER_TASK} tags`);
+    }
+    let tag = await tx.tag.findFirst({ where: { name } });
+    if (!tag) tag = await tx.tag.create({ data: { name } });
+    await tx.taskTag.create({ data: { taskId, tagId: tag.id } });
+    return { tag: { id: toPublicId('tag', tag.id), name }, created: true };
+  });
 }
 
 export async function removeTag(taskId: number, tagId: number): Promise<void> {
