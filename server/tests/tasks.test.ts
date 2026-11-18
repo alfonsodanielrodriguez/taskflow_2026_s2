@@ -71,5 +71,10 @@ describe('Tareas', () => {
     expect(res.status).toBe(403);
     expect(res.body.error).toEqual(expect.objectContaining({ code: 'FORBIDDEN', message: expect.any(String), details: expect.any(Array) }));
     expect(res.body.error.message.length).toBeGreaterThan(0);
+    const retained = await request(app).get(`/api/tasks/${task.id}`).set(auth(ownerToken));
+    expect(retained.status).toBe(200);
+    expect(retained.body.id).toBe(task.id);
+    await request(app).delete(`/api/tasks/${task.id}`).set(auth(ownerToken)).expect(204);
+
   });
 });

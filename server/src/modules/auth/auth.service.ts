@@ -82,8 +82,11 @@ export async function login(body: Record<string, unknown>) {
     throw unauthorized('Invalid credentials');
   }
 
-  if (user.lockedUntil) {
-    await db.user.update({ where: { id: user.id }, data: { lockedUntil: null } });
+  if (user.failedAttempts > 0 || user.lockedUntil) {
+    await db.user.update({
+      where: { id: user.id },
+      data: { failedAttempts: 0, lockedUntil: null },
+    });
   }
 
   return {

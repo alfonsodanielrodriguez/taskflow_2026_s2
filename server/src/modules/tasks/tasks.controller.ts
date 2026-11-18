@@ -106,7 +106,8 @@ export async function addTag(req: Request, res: Response, next: NextFunction): P
   try {
     const taskId = parsePublicId(req.params.taskId, 'task');
     if (taskId === null) throw notFound('Task not found');
-    res.status(201).json(await service.addTag(taskId, req.body?.name));
+    const result = await service.addTag(taskId, req.body?.name);
+    res.status(result.created ? 201 : 200).json(result.tag);
   } catch (err) {
     next(err);
   }
